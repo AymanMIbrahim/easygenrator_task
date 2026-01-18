@@ -1,0 +1,95 @@
+{
+  "project": {
+    "domain": "E-Commerce Platform",
+    "total_samples": 350,
+    "max_regeneration_attempts": 2
+  },
+
+  "personas": [
+    {
+      "name": "Developer",
+      "tone": "technical",
+      "focus": ["performance", "features"]
+    },
+    {
+      "name": "Product Manager",
+      "tone": "professional",
+      "focus": ["workflow", "collaboration"]
+    },
+    {
+      "name": "CTO",
+      "tone": "formal",
+      "focus": ["security", "cost"]
+    },
+    {
+      "name": "Normal User",
+      "tone": "Casual",
+      "focus": ["usability", "credibility "]
+    }
+
+  ],
+  "persona_distribution": {
+    "0": 0.1,
+    "1": 0.1,
+    "2": 0.1,
+    "3": 0.7
+  },
+  "rating_distribution": {
+    "5": 0.4,
+    "4": 0.3,
+    "3": 0.2,
+    "2": 0.1
+  },
+
+  "review_rules": {
+    "min_words": 40,
+    "max_words": 100
+  },
+
+  "models":[
+    {
+          "model_name": "llama-3.3-70b-versatile",
+          "temperature": 0.7,
+          "max_tokens": 256
+    },
+    {
+          "model_name": "meta-llama/llama-4-scout-17b-16e-instruct",
+          "temperature": 0.7,
+          "max_tokens": 256
+    }
+  ],
+  "selected_model": 1,
+  "quality": {
+    "max_similarity": 0.8,
+    "min_quality_score": 0.55
+  },
+
+  "output": {
+    "dataset_path": "./output/reviews.json",
+    "report_path": "./reports/report.md"
+  },
+  "DOMAIN_ANCHOR":["The product arrived on time and matched the description on the website.",
+    "Packaging was secure and the item was in good condition upon delivery.",
+    "I have been using this product for a few weeks and it works as expected.",
+    "The quality is decent for the price and meets basic expectations.",
+    "Shipping was fast and tracking information was accurate.",
+    "Customer service responded quickly and handled the issue professionally.",
+    "The setup was straightforward and instructions were easy to follow.",
+    "The item performs well for everyday use without any major issues.",
+    "I had to contact the seller regarding a return and the process was smooth.",
+    "Overall, the product offers reasonable value compared to similar items."
+  ],
+  "FORBIDDEN_ANCHOR": [
+    "This product completely changed my life in ways I never imagined.",
+    "It is absolutely perfect in every single way with no flaws at all.",
+    "I cannot believe how magical this product feels every time I use it.",
+    "This is the best thing ever created and nothing else comes close.",
+    "It solved all my problems instantly and exceeded all expectations.",
+    "Everyone on earth should buy this product immediately.",
+    "This revolutionary product feels unreal and beyond human standards.",
+    "I have never been happier in my entire life because of this product.",
+    "There is nothing to improve because it is already flawless.",
+    "This miracle product works like magic and fixes everything."
+  ]
+
+}
