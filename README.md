@@ -208,3 +208,151 @@ The system compares models on:
 
 * Domain semantic score
 * Forbidden / exaggeration score
+
+## 🐳 Docker Support
+
+The project is fully containerized using **Docker** to ensure reproducibility, portability, and ease of deployment across different environments.
+
+The Docker setup is **CPU-only** and optimized for lightweight NLP workloads, making it suitable for local development, servers, and cloud environments without GPU requirements.
+
+---
+
+## 📦 Docker Requirements
+
+* Docker >= 20.x
+* No GPU or CUDA required
+* Internet access on first run (to download models)
+
+---
+
+## 🏗️ Docker Image Design
+
+* **Base image:** `python:3.10-slim`
+* **Execution mode:** CPU-only
+* **Web server:** Uvicorn
+* **Framework:** FastAPI
+* **Semantic models:** Sentence Transformers (MiniLM)
+
+The image is intentionally kept minimal to reduce size and startup time.
+
+---
+
+## 🛠️ Build Docker Image
+
+From the project root directory:
+
+```bash
+docker build -t synthetic-review-api .
+```
+
+This will:
+
+* Install all Python dependencies
+* Copy the full project source
+* Prepare the FastAPI application for execution
+
+---
+
+## ▶️ Run the Container
+
+### Basic run
+
+```bash
+docker run -p 8000:8000 synthetic-review-api
+```
+
+Access the API at:
+
+```
+http://localhost:8000
+```
+
+Swagger documentation:
+
+```
+http://localhost:8000/docs
+```
+
+---
+
+## 📂 Persisting Outputs (Recommended)
+
+To persist generated reports and outputs outside the container:
+
+```bash
+docker run \
+  -p 8000:8000 \
+  -v $(pwd)/reports:/app/reports \
+  -v $(pwd)/output:/app/output \
+  synthetic-review-api
+```
+
+This ensures:
+
+* Generated Markdown reports are saved locally
+* Output datasets are preserved across container restarts
+
+---
+
+## 📄 Downloading the Report (Docker)
+
+Once the container is running, the comparison report can be downloaded via:
+
+```http
+POST /generate_reports
+```
+
+The response is a downloadable Markdown file:
+
+```
+model_comparison.md
+```
+
+---
+
+## ⚙️ Environment & Performance Notes
+
+* Sentence Transformer models are downloaded on first run and cached inside the container
+* Initial startup may take slightly longer due to model loading
+* Subsequent requests are significantly faster
+* The system is optimized for datasets in the range of hundreds to low thousands of samples
+
+---
+
+## 🔒 Security & Best Practices
+
+* No dynamic file paths are exposed in the API
+* Download endpoints are read-only
+* Docker image excludes unnecessary files via `.dockerignore`
+* CPU-only execution avoids GPU dependency issues
+
+---
+
+## 📌 Design Rationale
+
+Docker was chosen to:
+
+* Standardize the execution environment
+* Simplify deployment and evaluation
+* Avoid dependency conflicts
+* Ensure consistent benchmarking across models
+
+---
+
+## 🧾 Example README Footer Addition (Optional)
+
+```md
+This project is fully containerized and can be deployed on any Docker-compatible environment without additional system dependencies.
+```
+
+---
+
+## ✅ Summary of Docker Integration
+
+* ✔ Portable deployment
+* ✔ CPU-only (no CUDA required)
+* ✔ FastAPI-ready
+* ✔ Persistent outputs supported
+* ✔ Production-friendly setup
+
+---
