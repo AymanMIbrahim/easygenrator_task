@@ -1,4 +1,5 @@
-# Synthetic Review Generator with Guardrails Easygenerator Task
+![Alt text](./EG_LOGO.png)
+# Synthetic Review Generator with Guardrails
 
 This project implements a **synthetic data generation pipeline** for realistic software/tool reviews, enriched with **automated quality guardrails** and **model-level comparison**.  
 The system is designed to generate human-like reviews, evaluate their quality, enforce diversity, and compare multiple LLMs under identical conditions.
